@@ -52,3 +52,13 @@
  st=81 rt='[[mar]] -> mdr' read
  st=82 rt='mdr -> ac' omdr iac newv newc
  nst=90
+
+*** ADD execution cycle ***
+*** Register addressing mode (Mode 0) ***
+ st=20 rt='rac + rb -> ac' orb rac iac newv newc
+ nst=90
+*** Register Indirect addressing mode (Mode 1) ***
+ st=30 rt='rac -> mar' orac imar
+ st=31 rt='[[mar]] -> mdr' read
+ st=32 rt='mdr + rb -> ac' orb omdr iac newv newc
+ nst=90
