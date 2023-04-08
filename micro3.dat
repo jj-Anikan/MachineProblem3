@@ -1,2 +1,54 @@
 *** ECE 5362 ****
-**** Machine Problem 3 ****
+**** Machine Problem 2 ****
+**** Jacob Mayhew ****
+*** start fetch cycle ***
+st=0 rt='[pc]-› mar' imar rac=1 rn=3
+st=1 rt='[[mar]]-› mdr' read
+st=2 rt='[mdr] -> ir' omdr iir
+st=3 rt='[pc]+1 -› q' rac=1 rn=3 ib p1 oadder
+st=4 rt= ' [q] -> pc ' oq wac=1 wn=3
+cond='ir158' value=2 nst=20
+cond='ir158' value=3 nst=30
+cond='ir158' value=4 nst=40
+cond='ir158' value=5 nst=50
+cond='ir158' value=6 nst=60
+cond='ir158' value=7 nst=70
+nst=10
+*** If any instructions are present except HALT or INC, a halt will occur. ***
+*** HALT execution cycle ***
+st=10 halt
+*** INC AC execution cycle ***
+*** Register addressing mode (Mode 0) ***
+st=20 rt='rac -> ac' orac iac newv newc
+nst=90
+*** Register Indirect addressing mode (Mode 1) ***
+st=30 rt='rac -> mar' orac imar
+st=31 rt='[[mar]] -> mdr' read
+st=32 rt='mdr -> ac' omdr iac newv newc
+nst=90
+*** Autoincrement addressing mode (Mode 2) ***
+st=40 rt='rac -> mar' orac imar
+st=41 rt='[[mar]] -> mdr' read
+st=42 rt='mdr -> ac' omdr iac newv newc
+nst=90
+*** Autodecrement addressing mode (Mode 3) ***
+st=50 rt='rac -> mar' orac imar
+st=51 rt='[[mar]] -> mdr' read
+st=52 rt='mdr -> ac' omdr iac newv newc
+nst=90
+*** Index addressing mode (Mode 4) ***
+st=60 rt='rac -> mar' orac imar
+st=61 rt='[pc]-› q' rac=1 rn=3 ib p1 oadder
+st=62 rt='[[mar]+[q]] -> mdr' read
+st=63 rt='mdr -> ac' omdr iac newv newc
+nst=90
+*** Absolute addressing mode (Mode 5) ***
+st=70 rt='[pc]-› mar' imar rac=1 rn=3 ib p1 oadder
+st=71 rt='[[mar]] -> mdr' read
+st=72 rt='mdr -> ac' omdr iac newv newc
+nst=90
+*** Immediate addressing mode (Mode 6) ***
+st=80 rt='[pc]+1 -› mar' imar rac=1 rn=3 ib p1 oadder
+st=81 rt='[[mar]] -> mdr' read
+st=82 rt='mdr -> ac' omdr iac newv newc
+nst=90
