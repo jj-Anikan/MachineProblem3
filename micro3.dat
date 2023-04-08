@@ -65,3 +65,9 @@
  st=31 rt='[[mar]] -> mdr' read
  st=32 rt='mdr + rb -> ac' orb omdr iac newv newc
  nst=90
+*** Autoincrement addressing mode (Mode 2) ***
+ st=40 rt='rac -> mar' orac imar
+ st=41 rt='[[mar]] -> mdr' read
+ st=42 rt='mdr + rb -> ac' orb omdr iac newv newc
+ st=43 rt='rac + 1 -> rac' orac iac
+ nst=90
