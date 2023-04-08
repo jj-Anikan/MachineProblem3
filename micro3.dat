@@ -13,6 +13,8 @@
  cond='ir158' value=5 nst=50
  cond='ir158' value=6 nst=60
  cond='ir158' value=7 nst=70
+ cond='ir158' value=8 nst=80
+ cond='ir158' value=9 nst=90
  nst=10
 *** If any instructions are present except HALT or INC, a halt will occur. ***
 *** HALT execution cycle ***
