@@ -1,0 +1,23 @@
+*************
+start test 1
+0001    AC
+0009    X
+0009    SP
+0000    PC
+0000    CVZN
+1012    add ac, (sp)
+1204    add (x)+, ac
+1404    add 2(x), ac
+0002
+1050    add ac, $CHANGE
+000C
+1600    add #$6, ac
+0006
+0000    halt
+FFFA    9:
+0002    A:
+0003    B:
+0004    C:
+0005    D:
+end test 1
+*************
