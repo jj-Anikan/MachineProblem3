@@ -71,7 +71,15 @@
       cond='ir64' value=5 nst=50
 
 ***** END: Update temp reg based on ADDR MOD *****
- 
+
+***** START: READ DESTINATION OPERAND from MEM ***
+ st=60 rt='[T4]   -> MAR' 	imar ot4 
+ st=61 rt='[[MAR]]-> MDR' 	read
+ st=62 rt='[MDR]  -> T5' 	omdr it5 
+       nst=150
+
+***** END: READ DESTINATION OPERAND from MEM ***
+
 ************* START: ALU single inst *************
  st=70
       cond='ir118' value=2 nst=75
@@ -106,6 +114,17 @@
       cond='ir64' value=3 nst=100
       cond='ir64' value=4 nst=100
       cond='ir64' value=5 nst=100
+
+************* Register Mode (DST) *****************
+*### We already handled in the ALU instruction ##*
+ st=95 rt='[T2]   -> DST' 	wac=3 ot2 newn newz 
+       nst=0
+
+***************** DST is MEMORY ******************
+ st=100 rt='[T4]  -> MAR' 	imar ot4 
+ st=101 rt='[T2]  -> MDR' 	imdr ot2 newz newn
+ st=102 rt='[MDR] -> [MAR]' 	write
+       nst=0
 
 ********  END: Single Operand Instruction   *******
       
