@@ -48,11 +48,11 @@
   220    1    9   9   2    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 [src]  -> t3    
   221    1    9   9   2    1    2 FFFB    9    9 FFFA   1 1204 1204 0001 [src]+1-> q     
   222    1    9   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [q]    -> src   
-  295    1    A   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [t3]   -> mar   
+  195    1    A   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [t3]   -> mar   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  296    1    A   9   2    1    A FFFB    9    9 FFFA   9 1204 1204 0001 [[mar]]-> mdr   
-  297    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [mdr]  -> t2    
+  196    1    A   9   2    1    A FFFB    9    9 FFFA   9 1204 1204 0001 [[mar]]-> mdr   
+  197    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [mdr]  -> t2    
    20    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 --              
    30    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [dst]-> t5      
   190    1    A   9   2    1    A FFFB    9    9    1   9 FFFB 1204 0001 --              
@@ -83,11 +83,11 @@
   230 FFFC    A   9   4 FFFB    4 FFFC    9    9    1   3    2 1404 0001 [mdr]  -> t1    
   231 FFFC    A   9   4    2    4 FFFC    9    9    1   3    2 1404 0001 [t1]+[src]->q   
   232 FFFC    A   9   4    2    C FFFC    9    9    1   3    2 1404 0001 [q]    -> t3    
-  295 FFFC    A   9   4    2    C FFFC    C    9    1   3    2 1404 0001 [t3]   -> mar   
-  296 FFFC    A   9   4    2    C FFFC    C    9    1   C    2 1404 0001 [[mar]]-> mdr   
+  195 FFFC    A   9   4    2    C FFFC    C    9    1   3    2 1404 0001 [t3]   -> mar   
+  196 FFFC    A   9   4    2    C FFFC    C    9    1   C    2 1404 0001 [[mar]]-> mdr   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  297 FFFC    A   9   4    2    C FFFC    C    9    1   C    4 1404 0001 [mdr]  -> t2    
+  197 FFFC    A   9   4    2    C FFFC    C    9    1   C    4 1404 0001 [mdr]  -> t2    
    20 FFFC    A   9   4    2    C    4    C    9    1   C    4 1404 0001 --              
    30 FFFC    A   9   4    2    C    4    C    9    1   C    4 1404 0001 [dst]-> t5      
   190 FFFC    A   9   4    2    C    4    C    9 FFFC   C    4 1404 0001 --              
@@ -169,7 +169,13 @@
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
     3    6    A   9   8    6    6    6    C    C    0   8    0    0 0000 [pc]+1 -> q     
     4    6    A   9   8    6    9    6    C    C    0   8    0    0 0000 [q] -> pc       
-   10    6    A   9   9    6    9    6    C    C    0   8    0    0 0000 --              
+   20    6    A   9   9    6    9    6    C    C    0   8    0    0 0000 --              
+   30    6    A   9   9    6    9    6    C    C    0   8    0    0 0000 [dst]-> t5      
+  190    6    A   9   9    6    9    6    C    C    6   8    0    0 0000 --              
+
+   st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
+  100    6    A   9   9    6    9    6    C    C    6   8    0    0 0000 --              
+   10    6    A   9   9    6    9    6    C    C    6   8    0    0 0000 --              
   test 1: Halt instruction executed 
   Hex/Decimal memory dump (least significant word on left)
   Only lines with at least one nonzero value printed
