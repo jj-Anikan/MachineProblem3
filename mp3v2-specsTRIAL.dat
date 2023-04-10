@@ -32,30 +32,38 @@
 
 ********* REGISTER INDIRECT *********
  st = 40 rt = '[dst]  -> t4'    	it4 rac = 3 
-      nst = 95
+       nst = 80
 
 *********** AUTOINC ***********
  st = 45 rt = '[dst]  -> t4'    	it4 rac = 3
  st = 46 rt = '[dst]+1-> q'  	      rac = 3 ib oadder p1
  st = 47 rt = '[q]    -> dst'     	oq wac = 3   
-       nst = 95
+       nst = 80
 
 *********** AUTODEC ***********
  st = 50 rt = '[dst]  -> t1'   	rac = 3 it1 
  st = 51 rt = '[t1]-1 -> q'   	oadder oa comp  
  st = 52 rt = '[q]    -> dst'    	wac = 3 oq  
  st = 53 rt = '[dst]  -> t4'   	rac = 3 it4    
-       nst = 95
+       nst = 80
       
 ********** INDEX **********
  st = 55 rt = '[mdr]  -> t1'   	it1 omdr
  st = 56 rt = '[t1]+[dst]-> q' 	rac = 3 ib oa oadder
  st = 57 rt = '[q]    -> t4'     	it4 oq
-       nst = 95
+       nst = 80
 
 ******** ABSOLUTE ***********
  st = 60 rt = '[mdr]  -> t4'   	omdr it4  
-       nst = 95
+       nst = 80
+
+***** START: READ DESTINATION OPERAND from MEM ***
+ st = 80 rt = '[t4]   -> mar' 	imar ot4 
+ st = 81 rt = '[[mar]]-> mdr' 	read
+ st = 82 rt = '[mdr]  -> t5' 	      omdr it5 
+       nst = 190
+
+***** END: READ DESTINATION OPERAND from MEM ***
 
 **** FETCH ******
  st = 85 rt = '[pc]   -> mar'  	rac = 1 rn = 3 imar
@@ -67,19 +75,11 @@
 
 ***** END: Update temp reg based on ADDR MOD *****
  
-***** START: READ DESTINATION OPERAND from MEM ***
- st = 95 rt = '[t4]   -> mar' 	imar ot4 
- st = 96 rt = '[[mar]]-> mdr' 	read
- st = 97 rt = '[mdr]  -> t5' 	      omdr it5 
-       nst = 190
-
-***** END: READ DESTINATION OPERAND from MEM ***
 
 ********* START: ALU single inst *********
  st = 100
   cond = 'ir118' value = 2 nst = 110
   cond = 'ir118' value = 3 nst = 120
-  cond = 'ir118' value = 4 nst = 125
        nst = 10 
 
 ********* INCREMENT INSTRUCTION **********
@@ -96,8 +96,9 @@
 
 ******** NEGATION INSTRUCTION ***********
 
- st = 125 rt = '0-[t5] -> q'        ib comp p1 newv newc ot5 oadder
- st = 126 rt = '[q]    -> t2' 	it2 oq
+ st = 125 rt = '[t5]   -> t1'     it1 ot5
+ st = 126 rt = '0-[t1] -> q' 	    ib comp p1 newv newc ot5 oadder
+ st = 127 rt = '[q]    -> t2'     it2 oq
        nst = 140
  
 *********  END: ALU single inst  *********
@@ -112,7 +113,7 @@
   cond = 'ir64' value = 5 nst = 160
 
 ********* Register Mode (dst) *********
- st = 150 rt = '[t2]   -> dst' 	wac = 3 ot2 newn newz 
+ st = 150 rt = '[t2]  -> dst' 	wac = 3 ot2 newn newz 
        nst = 0
 
 ********* dst is MEMORY **********
@@ -129,7 +130,8 @@
  st = 190
   cond = 'ir1512' value = 0 nst = 100
   cond = 'ir1512' value = 1 nst = 250
-  cond = 'ir1512' value = 2 nst = 271
+  cond = 'ir1512' value = 1 nst = 260
+  cond = 'ir1512' value = 3 nst = 271
        nst = 140
 
 ***** END: Redirect to single or double ALU*******
@@ -206,6 +208,11 @@
  st = 251 rt = '[t5]+[t1]->q' 	oadder oa newv newc ib ot5
  st = 252 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
+
+*********** MOVE INSTRUCTION *********
+ st=260 rt='[T3] -> T1' it1 ot3
+ st=261 rt='[T1] -> T2' it2 it1
+       nst=90
 
 ***** END: ALU DOUBLE INSTRUCTION ********
 
