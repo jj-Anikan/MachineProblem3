@@ -15,25 +15,25 @@
     4    1    9   9   0    0    1    0    0    0    0   0 1012 1012 0000 [q] -> pc       
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  155    1    9   9   1    0    1    0    0    0    0   0 1012 1012 0000 --              
-  160    1    9   9   1    0    1    0    0    0    0   0 1012 1012 0000 [src]  -> t2    
+  200    1    9   9   1    0    1    0    0    0    0   0 1012 1012 0000 --              
+  210    1    9   9   1    0    1    0    0    0    0   0 1012 1012 0000 [src]  -> t2    
    20    1    9   9   1    0    1    1    0    0    0   0 1012 1012 0000 --              
-   30    1    9   9   1    0    1    1    0    0    0   0 1012 1012 0000 [dst]  -> t4    
-   60    1    9   9   1    0    1    1    0    9    0   0 1012 1012 0000 [t4]   -> mar   
+   40    1    9   9   1    0    1    1    0    0    0   0 1012 1012 0000 [dst]  -> t4    
+   95    1    9   9   1    0    1    1    0    9    0   0 1012 1012 0000 [t4]   -> mar   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-   61    1    9   9   1    0    1    1    0    9    0   9 1012 1012 0000 [[mar]]-> mdr   
-   62    1    9   9   1    0    1    1    0    9    0   9 FFFA 1012 0000 [mdr]  -> t5    
-  150    1    9   9   1    0    1    1    0    9 FFFA   9 FFFA 1012 0000 --              
+   96    1    9   9   1    0    1    1    0    9    0   9 1012 1012 0000 [[mar]]-> mdr   
+   97    1    9   9   1    0    1    1    0    9    0   9 FFFA 1012 0000 [mdr]  -> t5    
+  190    1    9   9   1    0    1    1    0    9 FFFA   9 FFFA 1012 0000 --              
   250    1    9   9   1    0    1    1    0    9 FFFA   9 FFFA 1012 0000 [t2]   -> t1    
   251    1    9   9   1    1    1    1    0    9 FFFA   9 FFFA 1012 0000 [t5]+[t1]->q    
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
   252    1    9   9   1    1 FFFB    1    0    9 FFFA   9 FFFA 1012 0000 [q]    -> t2    
-   90    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 --              
-  100    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 [t4]  -> mar    
-  101    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 [t2]  -> mdr    
-  102    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFB 1012 0001 [mdr] -> [mar]  
+  140    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 --              
+  160    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 [t4]  -> mar    
+  161    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFA 1012 0000 [t2]  -> mdr    
+  162    1    9   9   1    1 FFFB FFFB    0    9 FFFA   9 FFFB 1012 0001 [mdr] -> [mar]  
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
    starting instruction 2
@@ -44,25 +44,25 @@
     4    1    9   9   1    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 [q] -> pc       
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  155    1    9   9   2    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 --              
-  170    1    9   9   2    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 [src]  -> t3    
-  171    1    9   9   2    1    2 FFFB    9    9 FFFA   1 1204 1204 0001 [src]+1-> q     
-  172    1    9   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [q]    -> src   
+  200    1    9   9   2    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 --              
+  220    1    9   9   2    1    2 FFFB    0    9 FFFA   1 1204 1204 0001 [src]  -> t3    
+  221    1    9   9   2    1    2 FFFB    9    9 FFFA   1 1204 1204 0001 [src]+1-> q     
+  222    1    9   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [q]    -> src   
   295    1    A   9   2    1    A FFFB    9    9 FFFA   1 1204 1204 0001 [t3]   -> mar   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
   296    1    A   9   2    1    A FFFB    9    9 FFFA   9 1204 1204 0001 [[mar]]-> mdr   
   297    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [mdr]  -> t2    
    20    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 --              
-   25    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [dst]-> t5      
-  150    1    A   9   2    1    A FFFB    9    9    1   9 FFFB 1204 0001 --              
+   30    1    A   9   2    1    A FFFB    9    9 FFFA   9 FFFB 1204 0001 [dst]-> t5      
+  190    1    A   9   2    1    A FFFB    9    9    1   9 FFFB 1204 0001 --              
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
   250    1    A   9   2    1    A FFFB    9    9    1   9 FFFB 1204 0001 [t2]   -> t1    
   251    1    A   9   2 FFFB    A FFFB    9    9    1   9 FFFB 1204 0001 [t5]+[t1]->q    
   252    1    A   9   2 FFFB FFFC FFFB    9    9    1   9 FFFB 1204 0001 [q]    -> t2    
-   90    1    A   9   2 FFFB FFFC FFFC    9    9    1   9 FFFB 1204 0001 --              
-   95    1    A   9   2 FFFB FFFC FFFC    9    9    1   9 FFFB 1204 0001 [t2]   -> dst   
+  140    1    A   9   2 FFFB FFFC FFFC    9    9    1   9 FFFB 1204 0001 --              
+  150    1    A   9   2 FFFB FFFC FFFC    9    9    1   9 FFFB 1204 0001 [t2]   -> dst   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
    starting instruction 3
@@ -73,7 +73,7 @@
     4 FFFC    A   9   2 FFFB    3 FFFC    9    9    1   2 1404 1404 0001 [q] -> pc       
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  155 FFFC    A   9   3 FFFB    3 FFFC    9    9    1   2 1404 1404 0001 --              
+  200 FFFC    A   9   3 FFFB    3 FFFC    9    9    1   2 1404 1404 0001 --              
   245 FFFC    A   9   3 FFFB    3 FFFC    9    9    1   2 1404 1404 0001 [pc]   -> mar   
   246 FFFC    A   9   3 FFFB    3 FFFC    9    9    1   3 1404 1404 0001 [[mar]]-> mdr   
   247 FFFC    A   9   3 FFFB    3 FFFC    9    9    1   3    2 1404 0001 [pc]+1 -> q     
@@ -89,15 +89,15 @@
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
   297 FFFC    A   9   4    2    C FFFC    C    9    1   C    4 1404 0001 [mdr]  -> t2    
    20 FFFC    A   9   4    2    C    4    C    9    1   C    4 1404 0001 --              
-   25 FFFC    A   9   4    2    C    4    C    9    1   C    4 1404 0001 [dst]-> t5      
-  150 FFFC    A   9   4    2    C    4    C    9 FFFC   C    4 1404 0001 --              
+   30 FFFC    A   9   4    2    C    4    C    9    1   C    4 1404 0001 [dst]-> t5      
+  190 FFFC    A   9   4    2    C    4    C    9 FFFC   C    4 1404 0001 --              
   250 FFFC    A   9   4    2    C    4    C    9 FFFC   C    4 1404 0001 [t2]   -> t1    
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
   251 FFFC    A   9   4    4    C    4    C    9 FFFC   C    4 1404 0001 [t5]+[t1]->q    
   252 FFFC    A   9   4    4    0    4    C    9 FFFC   C    4 1404 1001 [q]    -> t2    
-   90 FFFC    A   9   4    4    0    0    C    9 FFFC   C    4 1404 1001 --              
-   95 FFFC    A   9   4    4    0    0    C    9 FFFC   C    4 1404 1001 [t2]   -> dst   
+  140 FFFC    A   9   4    4    0    0    C    9 FFFC   C    4 1404 1001 --              
+  150 FFFC    A   9   4    4    0    0    C    9 FFFC   C    4 1404 1001 [t2]   -> dst   
    starting instruction 4
     0    0    A   9   4    4    0    0    C    9 FFFC   C    4 1404 1010 [pc] -> mar     
 
@@ -106,33 +106,33 @@
     2    0    A   9   4    4    0    0    C    9 FFFC   4 1050 1404 1010 [mdr] -> ir     
     3    0    A   9   4    4    0    0    C    9 FFFC   4 1050 1050 1010 [pc]+1 -> q     
     4    0    A   9   4    4    5    0    C    9 FFFC   4 1050 1050 1010 [q] -> pc       
-  155    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 --              
+  200    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 --              
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  160    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 [src]  -> t2    
+  210    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 [src]  -> t2    
    20    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 --              
-   55    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 [pc]   -> mar   
-   56    0    A   9   5    4    5    0    C    9 FFFC   5 1050 1050 1010 [[mar]]-> mdr   
-   57    0    A   9   5    4    5    0    C    9 FFFC   5    C 1050 1010 [pc]+1 -> q     
+   85    0    A   9   5    4    5    0    C    9 FFFC   4 1050 1050 1010 [pc]   -> mar   
+   86    0    A   9   5    4    5    0    C    9 FFFC   5 1050 1050 1010 [[mar]]-> mdr   
+   87    0    A   9   5    4    5    0    C    9 FFFC   5    C 1050 1010 [pc]+1 -> q     
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-   58    0    A   9   5    4    6    0    C    9 FFFC   5    C 1050 1010 [q]    -> pc    
-   50    0    A   9   6    4    6    0    C    9 FFFC   5    C 1050 1010 [mdr]  -> t4    
-   60    0    A   9   6    4    6    0    C    C FFFC   5    C 1050 1010 [t4]   -> mar   
-   61    0    A   9   6    4    6    0    C    C FFFC   C    C 1050 1010 [[mar]]-> mdr   
-   62    0    A   9   6    4    6    0    C    C FFFC   C    4 1050 1010 [mdr]  -> t5    
+   88    0    A   9   5    4    6    0    C    9 FFFC   5    C 1050 1010 [q]    -> pc    
+   60    0    A   9   6    4    6    0    C    9 FFFC   5    C 1050 1010 [mdr]  -> t4    
+   95    0    A   9   6    4    6    0    C    C FFFC   5    C 1050 1010 [t4]   -> mar   
+   96    0    A   9   6    4    6    0    C    C FFFC   C    C 1050 1010 [[mar]]-> mdr   
+   97    0    A   9   6    4    6    0    C    C FFFC   C    4 1050 1010 [mdr]  -> t5    
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  150    0    A   9   6    4    6    0    C    C    4   C    4 1050 1010 --              
+  190    0    A   9   6    4    6    0    C    C    4   C    4 1050 1010 --              
   250    0    A   9   6    4    6    0    C    C    4   C    4 1050 1010 [t2]   -> t1    
   251    0    A   9   6    0    6    0    C    C    4   C    4 1050 1010 [t5]+[t1]->q    
   252    0    A   9   6    0    4    0    C    C    4   C    4 1050 0010 [q]    -> t2    
-   90    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 --              
+  140    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 --              
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-  100    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 [t4]  -> mar    
-  101    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 [t2]  -> mdr    
-  102    0    A   9   6    0    4    4    C    C    4   C    4 1050 0000 [mdr] -> [mar]  
+  160    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 [t4]  -> mar    
+  161    0    A   9   6    0    4    4    C    C    4   C    4 1050 0010 [t2]  -> mdr    
+  162    0    A   9   6    0    4    4    C    C    4   C    4 1050 0000 [mdr] -> [mar]  
    starting instruction 5
     0    0    A   9   6    0    4    4    C    C    4   C    4 1050 0000 [pc] -> mar     
     1    0    A   9   6    0    4    4    C    C    4   6    4 1050 0000 [[mar]] -> mdr  
@@ -141,7 +141,7 @@
     2    0    A   9   6    0    4    4    C    C    4   6 1600 1050 0000 [mdr] -> ir     
     3    0    A   9   6    0    4    4    C    C    4   6 1600 1600 0000 [pc]+1 -> q     
     4    0    A   9   6    0    7    4    C    C    4   6 1600 1600 0000 [q] -> pc       
-  155    0    A   9   7    0    7    4    C    C    4   6 1600 1600 0000 --              
+  200    0    A   9   7    0    7    4    C    C    4   6 1600 1600 0000 --              
   245    0    A   9   7    0    7    4    C    C    4   6 1600 1600 0000 [pc]   -> mar   
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
@@ -152,15 +152,15 @@
    20    0    A   9   8    0    8    6    C    C    4   7    6 1600 0000 --              
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-   25    0    A   9   8    0    8    6    C    C    4   7    6 1600 0000 [dst]-> t5      
-  150    0    A   9   8    0    8    6    C    C    0   7    6 1600 0000 --              
+   30    0    A   9   8    0    8    6    C    C    4   7    6 1600 0000 [dst]-> t5      
+  190    0    A   9   8    0    8    6    C    C    0   7    6 1600 0000 --              
   250    0    A   9   8    0    8    6    C    C    0   7    6 1600 0000 [t2]   -> t1    
   251    0    A   9   8    6    8    6    C    C    0   7    6 1600 0000 [t5]+[t1]->q    
   252    0    A   9   8    6    6    6    C    C    0   7    6 1600 0000 [q]    -> t2    
 
    st   ac    x  sp  pc   t1    q   t2   t3   t4   t5 mar  mdr   ir cvzn reg xfer
-   90    0    A   9   8    6    6    6    C    C    0   7    6 1600 0000 --              
-   95    0    A   9   8    6    6    6    C    C    0   7    6 1600 0000 [t2]   -> dst   
+  140    0    A   9   8    6    6    6    C    C    0   7    6 1600 0000 --              
+  150    0    A   9   8    6    6    6    C    C    0   7    6 1600 0000 [t2]   -> dst   
    starting instruction 6
     0    6    A   9   8    6    6    6    C    C    0   7    6 1600 0000 [pc] -> mar     
     1    6    A   9   8    6    6    6    C    C    0   8    6 1600 0000 [[mar]] -> mdr  
