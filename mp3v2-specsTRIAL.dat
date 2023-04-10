@@ -56,8 +56,8 @@
        nst = 95
 
 ******** SECOND FETCH for Index, #,$ *************
- st = 85 rt = '[pc]   -> MAR'  	rac = 1 rn = 3 imar
- st = 86 rt = '[[MAR]]-> mdr'       read
+ st = 85 rt = '[pc]   -> mar'  	rac = 1 rn = 3 imar
+ st = 86 rt = '[[mar]]-> mdr'       read
  st = 87 rt = '[pc]+1 -> q'  	oadder p1 ib rac = 1 rn = 3   
  st = 88 rt = '[q]    -> pc'    	wac = 1 wn = 3 oq 
        cond = 'ir64' value = 4 nst = 55
@@ -66,8 +66,8 @@
 ***** END: Update temp reg based on ADDR MOD *****
  
 ***** START: READ DESTINATION OPERAND from MEM ***
- st = 95 rt = '[t4]   -> MAR' 	imar ot4 
- st = 96 rt = '[[MAR]]-> mdr' 	read
+ st = 95 rt = '[t4]   -> mar' 	imar ot4 
+ st = 96 rt = '[[mar]]-> mdr' 	read
  st = 97 rt = '[mdr]  -> t5' 	omdr it5 
        nst = 190
 
@@ -82,13 +82,13 @@
 
 ************* INCREMENT INSTRUCTION **************
  st = 110 rt = '[t5]   -> t1' 	it1 ot5 
- st = 111 rt = '[t1]+1 -> q' 	oadder p1 oa newv newc 
+ st = 111 rt = '[t1]+1 -> q' 	      oadder p1 oa newv newc 
  st = 112 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
 ************ DECREMENT INSTRUCTION ***************
  st = 120 rt = '[t5]   -> t1' 	it1 ot5 
- st = 121 rt = '[t1]-1 -> q' 	oadder comp oa newv newc 
+ st = 121 rt = '[t1]-1 -> q' 	      oadder comp oa newv newc 
  st = 122 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
@@ -115,9 +115,9 @@
        nst = 0
 
 ***************** dst is MEMORY ******************
- st = 160 rt = '[t4]  -> MAR' 	imar ot4 
+ st = 160 rt = '[t4]  -> mar' 	imar ot4 
  st = 161 rt = '[t2]  -> mdr' 	imdr ot2 newz newn
- st = 162 rt = '[mdr] -> [MAR]' 	write
+ st = 162 rt = '[mdr] -> [mar]' 	write
        nst = 0
 
 *********** END: Write back the data *************
@@ -128,8 +128,7 @@
  st = 190
        cond = 'ir1512' value = 0 nst = 100
        cond = 'ir1512' value = 1 nst = 250
-       cond = 'ir1512' value = 2 nst = 255
-       cond = 'ir1512' value = 3 nst = 271
+       cond = 'ir1512' value = 2 nst = 271
        nst = 140
 
 ***** END: Redirect to single or double ALU*******
@@ -182,8 +181,8 @@
        nst = 20
 
 ************** SECOND FETCH src ******************
- st = 245 rt = '[pc]   -> MAR'    	rac = 1 rn = 3 imar 
- st = 246 rt = '[[MAR]]-> mdr' 	read
+ st = 245 rt = '[pc]   -> mar'    	rac = 1 rn = 3 imar 
+ st = 246 rt = '[[mar]]-> mdr' 	read
  st = 247 rt = '[pc]+1 -> q'    	oadder p1 ib rac = 1 rn = 3  
  st = 248 rt = '[q]    -> pc'      	wac = 1 wn = 3 oq 
        cond = 'ir118' value = 4 nst = 230
@@ -198,29 +197,11 @@
  st = 252 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
-*************** SUB INSTRUCTION ******************
- st = 255 rt = '[t5]   -> t1' 	it1 ot5 
- st = 256 rt = '[t1]-[t2]->q' 	oadder oa ib comp p1 ot2 newv newc 
- st = 257
-	cond = 'c' value = 0 nst = 258
-	cond = 'c' value = 1 nst = 259
- st = 258 setc 
-       nst = 260
- st = 259 clrc
- st = 260 rt = '[q]    -> t2' 	it2 oq 
-       nst = 140
-
-************** MOVE INSTRUCTION ******************
-************* CLEAR DESIRED FLAGS ****************
-
- st = 271 rt = 'clear c & v' 	clrv clrc
-       nst = 140    
-
 ********* END: ALU DOUBLE INSTRUCTION ************
 
 *********** START: READ SRC FROM MEMORY **********
- st = 295 rt = '[t3]   -> MAR' 	imar ot3 
- st = 296 rt = '[[MAR]]-> mdr' 	read
+ st = 295 rt = '[t3]   -> mar' 	imar ot3 
+ st = 296 rt = '[[mar]]-> mdr' 	read
  st = 297 rt = '[mdr]  -> t2' 	omdr it2  
        nst = 20
 *********** END: READ SRC FROM MEMORY ************
