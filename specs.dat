@@ -26,46 +26,44 @@
  cond = 'ir64' value = 5 nst = 85
       nst = 0
 
-********* REGISTER **********
+*** register ***
  st = 30 rt = '[dst]-> t5' 		it5 rac = 3 
        nst = 190
 
-********* REGISTER INDIRECT *********
+*** register indirect ***
  st = 40 rt = '[dst]  -> t4'    	it4 rac = 3 
        nst = 80
 
-*********** AUTOINC ***********
+*** autoinc ***
  st = 45 rt = '[dst]  -> t4'    	it4 rac = 3
  st = 46 rt = '[dst]+1-> q'  	      rac = 3 ib oadder p1
  st = 47 rt = '[q]    -> dst'     	oq wac = 3   
        nst = 80
 
-*********** AUTODEC ***********
+*** autodec ***
  st = 50 rt = '[dst]  -> t1'   	rac = 3 it1 
  st = 51 rt = '[t1]-1 -> q'   	oadder oa comp  
  st = 52 rt = '[q]    -> dst'    	wac = 3 oq  
  st = 53 rt = '[dst]  -> t4'   	rac = 3 it4    
        nst = 80
       
-********** INDEX **********
+*** index ***
  st = 55 rt = '[mdr]  -> t1'   	it1 omdr
  st = 56 rt = '[t1]+[dst]-> q' 	rac = 3 ib oa oadder
  st = 57 rt = '[q]    -> t4'     	it4 oq
        nst = 80
 
-******** ABSOLUTE ***********
+*** absolute ***
  st = 60 rt = '[mdr]  -> t4'   	omdr it4  
        nst = 80
 
-***** START: READ DESTINATION OPERAND from MEM ***
+*** read in dest from memory ***
  st = 80 rt = '[t4]   -> mar' 	imar ot4 
  st = 81 rt = '[[mar]]-> mdr' 	read
  st = 82 rt = '[mdr]  -> t5' 	      omdr it5 
        nst = 190
 
-***** END: READ DESTINATION OPERAND from MEM ***
-
-**** FETCH ******
+*** fetch ***
  st = 85 rt = '[pc]   -> mar'  	rac = 1 rn = 3 imar
  st = 86 rt = '[[mar]]-> mdr'       read
  st = 87 rt = '[pc]+1 -> q'  	      rac = 1 rn = 3 oadder p1 ib
@@ -73,37 +71,32 @@
   cond = 'ir64' value = 4 nst = 55
   cond = 'ir64' value = 5 nst = 60
 
-***** END: Update temp reg based on ADDR MOD *****
- 
-
-********* START: ALU single inst *********
+*** single instructions ***
  st = 100
   cond = 'ir118' value = 2 nst = 110
   cond = 'ir118' value = 3 nst = 120
        nst = 10 
 
-********* INCREMENT INSTRUCTION **********
+*** inc ***
  st = 110 rt = '[t5]   -> t1' 	it1 ot5 
  st = 111 rt = '[t1]+1 -> q' 	      oadder p1 oa newv newc 
  st = 112 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
-******** DECREMENT INSTRUCTION ***********
+*** dec ***
  st = 120 rt = '[t5]   -> t1' 	it1 ot5 
  st = 121 rt = '[t1]-1 -> q' 	      oadder comp newv newc oa 
  st = 122 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
-******** NEGATION INSTRUCTION ***********
+*** neg ***
 
  st = 125 rt = '[t5]   -> t1'     it1 ot5
  st = 126 rt = '0-[t1] -> q' 	    ib comp p1 newv newc ot5 oadder
  st = 127 rt = '[q]    -> t2'     it2 oq
        nst = 140
- 
-*********  END: ALU single inst  *********
 
-***** START: Write back the data *********
+*** write ***
  st = 140
   cond = 'ir64' value = 0 nst = 150
   cond = 'ir64' value = 1 nst = 160
@@ -112,21 +105,18 @@
   cond = 'ir64' value = 4 nst = 160
   cond = 'ir64' value = 5 nst = 160
 
-********* Register Mode (dst) *********
+*** register mode ***
  st = 150 rt = '[t2]  -> dst' 	wac = 3 ot2 newn newz 
        nst = 0
 
-********* dst is MEMORY **********
+*** dst to memory ***
  st = 160 rt = '[t4]  -> mar' 	imar ot4 
  st = 161 rt = '[t2]  -> mdr' 	imdr ot2 newz newn
  st = 162 rt = '[mdr] -> [mar]' 	write
        nst = 0
 
-******* END: Write back the data *********
 
-****  END: Single Operand Instruction   *******
-
-**** START: ALU redirect to single/double INS******
+*** select double or single ***
  st = 190
   cond = 'ir1512' value = 0 nst = 100
   cond = 'ir1512' value = 1 nst = 250
@@ -134,20 +124,16 @@
   cond = 'ir1512' value = 3 nst = 271
        nst = 140
 
-***** END: Redirect to single or double ALU*******
-
-******* START: DOUBLE OPERAND INSTRUCTIONS *******
 
 
-******* START: READ SRC FROM MEMORY ******
+
+*** read src from memory for double instructions ***
  st = 195 rt = '[t3]   -> mar' 	imar ot3 
  st = 196 rt = '[[mar]]-> mdr' 	read
  st = 197 rt = '[mdr]  -> t2' 	omdr it2  
        nst = 20
-******* END: READ SRC FROM MEMORY ********
 
-
-***** Source addressing mode is obtained here *****
+*** select addressing mode ***
  st = 200
  cond = 'ir118' value = 0 nst = 210
  cond = 'ir118' value = 1 nst = 215
@@ -157,28 +143,28 @@
  cond = 'ir118' value = 5 nst = 245
  cond = 'ir118' value = 6 nst = 245
      
-********  Register mode **********
+*** register for double inst ***
  st = 210 rt = '[src]  -> t2'    	rac = 2 it2
        nst = 20
 
-******** Register Indirect mode **********
+*** register indirect for double inst ***
  st = 215 rt = '[src]  -> t3'    	rac = 2 it3
        nst = 195
 
-********** Autoincrement mode ********
+*** autoinc for double inst ***
  st = 220 rt = '[src]  -> t3'    	rac = 2 it3
  st = 221 rt = '[src]+1-> q'   	rac = 2 ib oadder p1
  st = 222 rt = '[q]    -> src'	wac = 2 oq
        nst = 195
 
-********** Autodecrement mode ********
+*** autodec for double inst ***
  st = 225 rt = '[src]  -> t1'    	rac = 2 it1
  st = 226 rt = '[t1]-1 -> q'    	oa comp oadder
  st = 227 rt = '[q]    -> src'      wac = 2 oq
  st = 228 rt = '[src]  -> t3'    	rac = 2 it3
        nst = 195
 
-********* Indexed mode ***********  
+*** index for double inst ***
  st = 230 rt = '[mdr]  -> t1'    	it1 omdr
  st = 231 rt = '[t1]+[src]->q'	rac = 2 ib oa oadder
  st = 232 rt = '[q]    -> t3'      	oq it3  
