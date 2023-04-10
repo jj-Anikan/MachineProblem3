@@ -11,12 +11,12 @@
 	nst = 200
 
 
-****	Halt *****
+***	Halt ***
  st = 10 halt
 
-******     Single Operand Instruction   *******
+*** single operand instructions ***
 
-*** START *****
+*** start ***
  st = 20
  cond = 'ir64' value = 0 nst = 30
  cond = 'ir64' value = 1 nst = 40
@@ -201,3 +201,5 @@
  st=260 rt='[T3] -> T1' it1 ot3
  st=261 rt='[T1] -> T2' it2 it1
        nst=90
+
+*** end of file ***
