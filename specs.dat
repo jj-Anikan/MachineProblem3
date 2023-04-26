@@ -2,10 +2,10 @@
 
 ******  Start fetch cycle *****
  st = 0	rt = '[pc] -> mar'	imar rac = 1 rn = 3
- st = 1	rt = '[[mar]] -> mdr'	read
+ st = 1	rt = '[[mar]] -> mdr'       read
  st = 2	rt = '[mdr] -> ir'	iir omdr
  st = 3	rt = '[pc]+1 -> q'	rac = 1 rn = 3 ib oadder p1
- st = 4	rt = '[q] -> pc'		oq wac = 1 wn = 3
+ st = 4	rt = '[q] -> pc'	oq wac = 1 wn = 3
 	cond = 'ir1512' value = 0 nst = 20
  cond = 'ir158'  value = 0 nst = 10
 	nst = 200
@@ -73,28 +73,69 @@
 
 *** single instructions ***
  st = 100
-  cond = 'ir118' value = 2 nst = 110
-  cond = 'ir118' value = 3 nst = 120
+  cond = 'ir118' value = 1 nst = 110
+  cond = 'ir118' value = 2 nst = 115
+  cond = 'ir118' value = 3 nst = 128
+  cond = 'ir118' value = 4 nst = 121
+  cond = 'ir118' value = 5 nst = 123
+  cond = 'ir118' value = 6 nst = 125
+  cond = 'ir118' value = 7 nst = 128
+  cond = 'ir118' value = 8 nst = 131
        nst = 10 
 
 *** inc ***
  st = 110 rt = '[t5]   -> t1' 	it1 ot5 
- st = 111 rt = '[t1]+1 -> q' 	      oadder p1 oa newv newc 
+ st = 111 rt = '[t1]+1 -> q' 	oadder p1 oa newv newc 
  st = 112 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
 *** dec ***
- st = 120 rt = '[t5]   -> t1' 	it1 ot5 
- st = 121 rt = '[t1]-1 -> q' 	      oadder comp newv newc oa 
- st = 122 rt = '[q]    -> t2' 	it2 oq 
+ st = 115 rt = '[t5]   -> t1' 	it1 ot5 
+ st = 116 rt = '[t1]-1 -> q' 	oadder comp newv newc oa 
+ st = 117 rt = '[q]    -> t2' 	it2 oq 
        nst = 140
 
 *** neg ***
 
- st = 125 rt = '[t5]   -> t1'     it1 ot5
- st = 126 rt = '0-[t1] -> q' 	    ib comp p1 newv newc ot5 oadder
- st = 127 rt = '[q]    -> t2'     it2 oq
+ st = 118 rt = '[t5]   -> t1'      it1 ot5
+ st = 119 rt = '0-[t1] -> q'       ib comp p1 newv newc ot5 oadder
+ st = 120 rt = '[q]    -> t2'      it2 oq
        nst = 140
+
+*** clr ***
+ st=121 rt='0->q' 		       oadder
+ st=122 rt='[q]->t2' 		oq it2 clrc clrv
+        nst=140
+
+*** comp ***
+ st=123 rt='[t5]bar->q' 	       ot5 ib comp oadder
+ st=124 rt='[q]->t2' 		oq it2 clrc clrv
+        nst=140
+
+*** jmp ***
+ st=125
+       cond='ir64' value=0 nst=372
+ st=126 rt='[t4]->pc' 		ot4 wac=1 wn=3
+        nst=0
+ st=127 rt='[t5]->pc' 		ot5 wac=1 wn=3
+        nst=0
+
+
+*** tst ***
+ st=128 rt='[t5]->t1' 		ot5 it1
+ st=129 rt='[t1]-0->q' 		oa oadder comp p1
+ st=130 rt='[q]->t5' 		oq it5 newz newn clrc clrv
+        nst=0
+
+*** jsr ***
+ st=131 rt='[sp]->t1' 		rac=1 rn=2 it1
+ st=132 rt='[t1]-1->q' 		oa comp oadder
+ st=133 rt='[q]->sp' 		oq wac=1 wn=2
+ st=134 rt='[sp]->mar' 		rac=1 rn=2 imar
+ st=135 rt='[pc]->mdr' 		rac=1 rn=3 imdr
+ st=136 rt='[mdr]->mar' 	       write
+        nst=125
+
 
 *** write ***
  st = 140
@@ -120,7 +161,10 @@
   cond = 'ir1512' value = 0 nst = 100
   cond = 'ir1512' value = 1 nst = 250
   cond = 'ir1512' value = 1 nst = 260
-  cond = 'ir1512' value = 3 nst = 271
+  cond = 'ir1512' value = 3 nst = 261
+  cond = 'ir1512' value = 4 nst = 500
+  cond = 'ir1512' value = 4 nst = 515
+  cond = 'ir1512' value = 4 nst = 520
        nst = 140
 
 *** read src from memory for double instructions ***
@@ -192,297 +236,59 @@
        nst = 140
 
 *** sub ***
+ st=253 rt='[T5]   -> T1' 	it1 ot5 
+ st=254 rt='[T1]-[T2]->Q' 	oadder oa ib comp p1 ot2 newv newc 
+ st=255
+       cond='c' value=0 nst=256
+       cond='c' value=1 nst=257
+ st=256 setc 
+       nst=220
+ st=257 clrc
+ st=258 rt='[Q]    -> T2' 	it2 oq 
+       nst=140
 
 *** move ***
- st=260 rt='[T3] -> T1' it1 ot3
- st=261 rt='[T1] -> T2' it2 it1
-       nst=90
+ st=260 rt='[t3] -> t1'     it1 ot3
+ st=261 rt='[t1] -> t2'     it2 it1
+       nst=140
+
+*** exg ***
+ st=270
+      cond='ir118' value=0 nst=271
+      nst=272
+ st=271 rt='[t5]->srcreg' 	ot5 wac=2
+      nst=275
+ st=272 rt='[t5]->mdr' 	ot5 imdr
+ st=273 rt='[t3]->mar' 	ot3 imar
+ st=274 rt='[mdr]->[mar]' 	write
+ st=275
+      cond='ir64' value=0 nst=276
+      nst=277
+ st=276 rt='[t2]->dstreg' 	ot2 wac=3
+       nst=0
+ st=277 rt='[t2]->mdr' 	ot2 imdr
+ st=278 rt='[t4]->mar' 	ot4 imar
+ st=279 rt='[mdr]->[mar]' 	write
+       nst=0
+
+*** or ***
+ st=285 rt='[t2]or[t5]->t2' 	ot2 ot5 ib oadder
+ st=286 rt='[q]->t2' 		oq it2 clrc clrv 
+       nst=140
+
+
+*** and ***
+ st=290 rt='[t2]bar->q' 	ot2 ib comp oadder
+ st=291 rt='[q]->t2'	 	oq it2
+ st=292 rt='[t5]bar->q' 	ot5 ib comp oadder
+ st=293 rt='[q]->t5' 	oq it5
+ st=294 rt='[t2]+[t5]->q' 	ot2 ot5 ib oadder
+ st=295 rt='[q]->t2' 	oq it2
+ st=296 rt='[t2]bar->q' 	ot2 comp ib oadder
+ st=297 rt='[q]->t2' 	oq it2 clrc clrv
+        nst=140
+
 
 *** end of file ***
 
 
-
-
-
-****************************************************************
-**************************************************
-********* START: SPECIAL INSTRUCTIONS *******
-**************************************************
-****************************************************************
-
-**************************************************
-********** SPECIAL BRANCH INSTRUCTION ************
-**************************************************
-
-****### Branch instructions are more complex ####***
-****### Refer to Priya.dat file and it's details file ###****
-
- st=250
-****go to set/clear***
-       cond='ir75' 	value=1 nst=300  
-       cond='ir76' 	value=2 nst=252
-       nst=10
-
- st=252
-	cond='ir5' value=0 nst=253
- nst=270
- st=253
-        cond='ir4' value=0 nst=254
- nst=270
- st=254
-        cond='ir3' value=0 nst=255
- nst=270
- st=255
-        cond='ir2' value=0 nst=256
- nst=270
- st=256
-        cond='ir1' value=0 nst=257
- nst=270
- st=257
-        cond='ir0' value=0 nst=325
- nst=270
-
-
-**************************************************
-************** START: BRANCHING*******************
-**************************************************
- st=270 rt='[pc] -> mar'     imar rac=1 rn=3
- st=271 rt='[[mar]] -> mdr'  read
- st=272 rt='[mdr] -> t1'     omdr it1
- st=273 rt='[pc] + 1 -> q'   rac=1 rn=3 ib p1 oadder
- st=274 rt='[q] -> pc'       oq wac=1 wn=3
-        cond='ir5'   value=1 nst=275
-        cond='ibrch' value=1 nst=276
- nst=0
- st=275 rt='ibrch'
-        cond='ibrch' value=0 nst=276
- nst=0
-
- st=276 rt='[pc]+[t1] -> q'  rac=1 rn=3 ib oa oadder
- st=277 rt='[q] -> pc'       oq wac=1 wn=3
- nst=0
-**************************************************
-*************** END: BRANCHING********************
-**************************************************
-
-
-**************************************************
-************** START: SET/CLEAR*******************
-**************************************************
-set/clr
- st=300 
-	cond='ir4' value=1 nst=311
-
-******************** CLEAR ************************
- st=301 
-	cond='ir3' value=0 nst=303
- st=302 rt='clr c'		clrc
-	nst=0 
- st=303 
-	cond='ir2' value=0 nst=305
- st=304 rt='clr v'		clrv
-	nst=0 
- st=305 
-	cond='ir1' value=0 nst=308
- st=306 rt='1-> q'		p1 oadder
- st=307 rt='[q]-> bus'		oq newz
-	nst=0 
- st=308
-	cond='ir0' value=0 nst=0
- st=309 rt='1-> q'		p1 oadder
- st=310 rt='[q]-> bus'		oq newn
- 	nst=0
-
-*********************SET**************************
- st=311 
-	cond='ir3' value=0 nst=313
- st=312 rt='set c'		setc
-	nst=0 
- st=313 
-	cond='ir2' value=0 nst=315
- st=314 rt='set v'		setv
-	nst=0 
- st=315 
-	cond='ir1' value=0 nst=318
- st=316 rt='0-> q'		oadder
- st=317 rt='[q]-> bus'		oq newz
-	nst=0 
- st=318 
-	cond='ir0' value=0 nst=0
- st=319 rt='-1-> q'		comp oadder
- st=320 rt='[q]-> bus'		oq newn
-	 nst=0
- 
-**************************************************
-************** END: SET/CLEAR*******************
-**************************************************
-
-
-**************************************************
-************START: RTS INSTRUCTION ***************
-**************************************************
- st=325 rt='[sp]->mar'		rac=1 rn=2 imar
- st=326 rt='[[mar]]->mdr'	read
- st=327 rt='[mdr]->pc' 		omdr wac=1 wn=3
- st=328 rt='[sp]+1->q' 		rac=1 rn=2 ib p1 oadder
- st=329 rt='[q]->sp' 		oq wac=1 wn=2
-        nst=0
-**************************************************
-*************END: RTS INSTRUCTION ****************
-**************************************************
-
-
-
-****************************************************************
-**************************************************
-********* END: SPECIAL INSTRUCTIONS *******
-**************************************************
-****************************************************************
-
-
-
-
-
-****************************************************************
-**************************************************
-****** START: CONTINUED ALU single inst **********
-**************************************************
-****************************************************************
-
-**************************************************
-*************** CLR  INSTRUCTION *****************
-**************************************************
- st=400 rt='0->q' 		oadder
- st=401 rt='[q]->t2' 		oq it2 clrc clrv
-        nst=90
-
-**************************************************
-************** COMP  INSTRUCTION *****************
-**************************************************
- st=402 rt='[t5]bar->q' 	ot5 ib comp oadder
- st=403 rt='[q]->t2' 		oq it2 clrc clrv
-        nst=90
-
-**************************************************
-*************** JMP  INSTRUCTION *****************
-**************************************************
- st=405
-       cond='ir64' value=0 nst=407
- st=406 rt='[t4]->pc' 		ot4 wac=1 wn=3
-        nst=0
- st=407 rt='[t5]->pc' 		ot5 wac=1 wn=3
-        nst=0
-
-**************************************************
-*************** TST  INSTRUCTION *****************
-**************************************************
- st=410 rt='[t5]->t1' 		ot5 it1
- st=411 rt='[t1]-0->q' 		oa oadder comp p1
- st=412 rt='[q]->t5' 		oq it5 newz newn clrc clrv
-        nst=0
-
-**************************************************
-*************** JSR  INSTRUCTION *****************
-**************************************************
- st=415 rt='[sp]->t1' 		rac=1 rn=2 it1
- st=416 rt='[t1]-1->q' 		oa comp oadder
- st=417 rt='[q]->sp' 		oq wac=1 wn=2
- st=418 rt='[sp]->mar' 		rac=1 rn=2 imar
- st=419 rt='[pc]->mdr' 		rac=1 rn=3 imdr
- st=420 rt='[mdr]->mar' 	write
-        nst=405
-
-
-****************************************************************
-**************************************************
-******** END: CONTINUED ALU single inst **********
-**************************************************
-****************************************************************
-
-
-
-**************************************************
-************* START: DBRA INSTRUCTION ************
-**************************************************
- st=450 rt='[pc]->mar' 		rac=1 rn=3 imar
- st=451 rt='[[mar]]->mdr' 	read
- st=452 rt='[mdr]->t2' 		omdr it2
- st=453 rt='[pc]+1 -> q'  	rac=1 rn=3 ib p1 oadder
- st=454 rt='[q] -> pc'    	oq wac=1 wn=3
- st=455 rt='[t5]->t1' 		ot5 it1
- st=456 rt='[t1]-1->q' 		oa comp oadder
- st=457 rt='[q]->t5' 		oq it5
-        cond='busn' value=1 nst=461
- st=458 rt='[pc]->t1' 		rac=1 rn=3 it1
- st=459 rt='[t1]+[t2]->q' 	oa ot2 ib oadder
- st=460 rt='[q]->pc' 		oq wac=1 wn=3
- st=461
-       cond='ir64' value=0 nst=465
- st=462 rt='[t4]->mar' 		ot4 imar
- st=463 rt='[t5]->mdr' 		ot5 imdr
- st=464 rt='[mdr]->[mar]' 	write
-        nst=0
- st=465 rt='[t5]->dstreg' 	ot5 wac=3
-        nst=0
-**************************************************
-*************** END: DBRA INSTRUCTION ************
-**************************************************
-
-
-
-****************************************************************
-**************************************************
-****** START: CONTINUED ALU double inst **********
-**************************************************
-****************************************************************
-
-
-**************************************************
-************* EXCHANGE INSTRUCTION ***************
-**************************************************
- st=500
-      cond='ir118' value=0 nst=501
-      nst=502
- st=501 rt='[t5]->srcreg' 	ot5 wac=2
-       nst=505
- st=502 rt='[t5]->mdr' 		ot5 imdr
- st=503 rt='[t3]->mar' 		ot3 imar
- st=504 rt='[mdr]->[mar]' 	write
- st=505
-      cond='ir64' value=0 nst=506
-      nst=507
- st=506 rt='[t2]->dstreg' 	ot2 wac=3
-       nst=0
- st=507 rt='[t2]->mdr' 		ot2 imdr
- st=508 rt='[t4]->mar' 		ot4 imar
- st=509 rt='[mdr]->[mar]' 	write
-       nst=0
-
-**************************************************
-*************** OR INSTRUCTION *******************
-**************************************************
-
- st=515 rt='[t2]or[t5]->t2' 	ot2 ot5 ib oadder
- st=516 rt='[q]->t2' 		oq it2 clrc clrv 
-       nst=90
-
-
-**************************************************
-*************** AND  INSTRUCTION *****************
-**************************************************
- st=520 rt='[t2]bar->q' 	ot2 ib comp oadder
- st=521 rt='[q]->t2'	 	oq it2
- st=522 rt='[t5]bar->q' 	ot5 ib comp oadder
- st=523 rt='[q]->t5' 		oq it5
- st=524 rt='[t2]+[t5]->q' 	ot2 ot5 ib oadder
- st=525 rt='[q]->t2' 		oq it2
- st=526 rt='[t2]bar->q' 	ot2 comp ib oadder
- st=527 rt='[q]->t2' 		oq it2 clrc clrv
-        nst=90
-
-
-****************************************************************
-**************************************************
-******** END: CONTINUED ALU double inst **********
-**************************************************
-****************************************************************
